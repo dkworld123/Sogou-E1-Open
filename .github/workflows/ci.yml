@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: lint & integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Shell syntax check (sh -n)
+        run: |
+          set -euo pipefail
+          # 含无扩展名的设备端脚本（S98_e1linux / SogouE1.dispatch）
+          find . -type f \( -name '*.sh' -o -name 'S98_e1linux' -o -name 'SogouE1.dispatch' \) \
+            -not -path './.git/*' -print0 | xargs -0 -n1 sh -n
+          echo "OK: all shell scripts parse"
+
+      - name: ShellCheck (error severity only)
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq shellcheck
+          find . -type f -name '*.sh' -not -path './.git/*' -print0 \
+            | xargs -0 shellcheck -S error -e SC1091,SC2086,SC2034 || true
+
+      - name: Python syntax check
+        run: |
+          set -euo pipefail
+          python3 -m compileall -q scripts tools
+          echo "OK: python files compile"
+
+      - name: Markdown link check
+        run: python3 tools/check_links.py
+
+      - name: Sensitive data scan
+        run: python3 tools/check_secrets.py
+
+      - name: Line ending check (device scripts must be LF)
+        run: |
+          set -euo pipefail
+          if grep -rlU $'\r' --include='*.sh' . ; then
+            echo "ERROR: some .sh files contain CRLF; device scripts must stay LF"
+            exit 1
+          fi
+          echo "OK: shell scripts are LF"

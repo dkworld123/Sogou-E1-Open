@@ -1,0 +1,106 @@
+name: Bug 报告
+description: 报告 E1 上的复现问题（录音导出 / chroot / 分槽 / 上屏 / 编译）
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    value: |
+      感谢反馈！请先读 [`docs/NOTICE.md`](https://github.com/dkworld123/Sogou-E1-Open/blob/main/docs/NOTICE.md)：
+      文档里的 MD5 / PARTUUID / 序列号都是**一台设备**的示例值。
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前请确认
+      options:
+        - label: 我已阅读 README 的「开始之前」与 `docs/NOTICE.md`，知道写分区有变砖风险
+          required: true
+        - label: 我已备份相关分区（`boot_a/b`、`system_a/b`、`misc`）
+          required: false
+        - label: 我搜索过现有 Issue，这不是重复报告
+          required: false
+
+  - type: dropdown
+    id: level
+    attributes:
+      label: 触发的操作层级
+      options:
+        - label: L0 导出录音 / 8 麦直录（纯只读）
+        - label: L1 设备本机 Linux（chroot）
+        - label: L2 录音 App 与分槽分发
+        - label: L3 改造 system_b（写分区）
+        - label: 不确定
+    validations:
+      required: true
+
+  - type: dropdown
+    id: slot
+    attributes:
+      label: 当前启动槽位
+      options:
+        - label: A 槽（slot_suffix=_a）
+        - label: B 槽（slot_suffix=_b）
+        - label: 不知道 / 没查
+
+  - type: input
+    id: device
+    attributes:
+      label: 设备型号与批次
+      description: 例如「搜狗 E1，序列号后 4 位 xxxx」——**不要写完整序列号**
+      placeholder: Sogou E1 / 批次 xxxx
+    validations:
+      required: true
+
+  - type: input
+    id: firmware
+    attributes:
+      label: 固件与分区信息
+      description: "来自 `cat /proc/cmdline` 与 `md5sum /dev/block/by-name/system_a`，可只贴关键行"
+      render: shell
+      placeholder: |
+        androidboot.slot_suffix=_b
+        root=PARTUUID=xxxxxxxx-xxxx
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 尽量给出可直接执行的命令
+      render: shell
+      placeholder: |
+        1. adb -s <SERIAL> shell "..."
+        2. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 关键输出 / 日志
+      description: 常用：`/mnt/sdcard/freE1/boot.log`、`/userdata/e1-recorder/audio.log`、`dmesg | tail -40`
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其他信息
+    validations:
+      required: false

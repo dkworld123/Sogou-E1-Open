@@ -1,5 +1,13 @@
 # Sogou E1 Open
 
+[![CI](https://github.com/dkworld123/Sogou-E1-Open/actions/workflows/ci.yml/badge.svg)](https://github.com/dkworld123/Sogou-E1-Open/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-RK3308%20%2F%20Linux%204.4.143-blue.svg)](docs/E1_SLOT_SWITCH.md)
+[![Flashing](https://img.shields.io/badge/flashing-L0%E2%80%93L2%20zero-risk-brightgreen.svg)](docs/INSTALL.md)
+[![Docs](https://img.shields.io/badge/docs-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%20%2F%20EN-informational.svg)](README.en.md)
+
+**简体中文** | [English](README.en.md)
+
 > 搜狗 AI 录音笔 E1 的**非官方**开源自救工具集。官方云服务已于 **2024-05-30** 停服，
 > 本项目让这支笔继续可用：导出录音、直录 8 麦阵列、跑完整 arm64 Linux、装开源录音 App。
 > **原厂 A 槽全程逐字节完整，随时可回退**；不改 uboot / trust / GPT，仓库不含任何原厂固件镜像。
@@ -31,7 +39,8 @@
 - [8. 关键结论](#8-关键结论)
 - [9. 回滚通道](#9-回滚通道)
 - [10. 已知局限与未完成](#10-已知局限与未完成)
-- [11. 声明、许可证与致谢](#11-声明许可证与致谢)
+- [11. 开源生态速览](#11-开源生态速览)
+- [12. 声明、许可证与致谢](#12-声明许可证与致谢)
 
 ---
 
@@ -139,12 +148,16 @@ sh stage3/e1_app_switch.sh slots                  # A=chopin  B=freE1（默认�
 ```
 .
 ├── README.md                 本文件（入口）
+├── README.en.md              English version of the same document
 ├── LICENSE                   MIT（仅覆盖本项目原创内容）
 ├── CHANGELOG.md              版本记录
 ├── CONTRIBUTING.md           贡献约定
 ├── THIRD_PARTY.md            上游项目 / 许可证状态 / 不打包说明
 ├── .gitignore                排除固件 / 录音 / 依赖 / 个人数据
 ├── .gitattributes            换行符约定：设备端脚本强制 LF
+├── .github/
+│   ├── workflows/ci.yml      CI：语法检查 + 链接检查 + 敏感串扫描
+│   └── ISSUE_TEMPLATE/       Bug / 功能建议表单
 ├── docs/
 │   ├── NOTICE.md             ★ 注明事项：风险、免责、合规、隐私、禁忌、未验证项
 │   ├── INSTALL.md            ★ 前置条件 + 分级安装 + 验证 + 回滚
@@ -159,14 +172,14 @@ sh stage3/e1_app_switch.sh slots                  # A=chopin  B=freE1（默认�
 │   ├── E1_GITHUB_PROJECTS.md GitHub 生态调研清单
 │   ├── SESSION_NOTES.md      开发期会话手记
 │   ├── UPSTREAM_PATCHES.md   对上游源码的改动（diff 文本，不分发上游文件）
-│   └── images/               真机界面截图
+│   └── images/               真机界面截图 + 生态图
 ├── scripts/                  PC / 设备两侧通用脚本（导出、chroot、切槽、恢复）
 ├── stage2/                   B 槽镜像构建（squashfs 注入 S98 钩子）
 ├── stage3/                   应用层分发器与全静态编译配置
 ├── qt5-recorder/             自写 Qt 5.9.4 录音器工程（C++ / QML / ALSA）
 ├── configs/                  原厂与改造版 asound.conf
 ├── windows/                  Windows 一键 bat / WSL2 辅助 ps1
-└── tools/                    依赖与上游源码获取脚本（不含任何二进制）
+└── tools/                    依赖获取、CI 检查脚本、生态图生成器（不含任何二进制）
 ```
 
 ---
@@ -266,7 +279,28 @@ flowchart TD
 
 ---
 
-## 11. 声明、许可证与致谢
+## 11. 开源生态速览
+
+整个 E1 生态到 2026-11 已形成四条**互不相同**的路线，风险和收益差别很大：
+换 App 最实用且零风险，换系统风险最高。
+
+![E1 开源生态图](docs/images/ecosystem.svg)
+
+*生态图由 `tools/make_ecosystem.py` 生成，数据来源 [`docs/E1_GITHUB_PROJECTS.md`](docs/E1_GITHUB_PROJECTS.md)。*
+
+| 路线 | 代表项目 | 要不要刷机 | 适合谁 |
+|---|---|---|---|
+| **A. 替换原厂 App** | `freE1`、`chopin/sogouE1` | **不用**，只往 `/userdata` 写两个文件 | 想让屏幕、按键、8 麦重新有用的人 |
+| **B. 补回云转写** | `E1Recorder`、社区自建方案 | 不用 | 想继续用转写/纪要的人 |
+| **C. 研究资料** | `E1_Research`、`Armbian_E1` | 只读 | 想理解显示/音频/按键原理的人 |
+| **D. 换系统 / 真 Armbian** | `build_e1`、`u-boot`、RK3308 SDK 系 | 要 | 愿意折腾且有救砖准备的人 |
+
+> 多个上游仓库**未声明 LICENSE**（图中橙色角标），本仓库只引用、不打包其源码，
+> 详见 [`THIRD_PARTY.md`](THIRD_PARTY.md)。
+
+---
+
+## 12. 声明、许可证与致谢
 
 - **非官方**：与搜狗 / 官方无任何关联，仅作兼容性描述；商标归权利人所有。
 - **不分发**：不含原厂固件、分区镜像、录音文件或数据库；请从自己的设备备份，且不要公开分发原厂固件。

@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Install guide
+    url: https://github.com/dkworld123/Sogou-E1-Open/blob/main/docs/INSTALL.md
+    about: Prerequisites, L0–L3 install steps, verification checklist, rollback table
+  - name: NOTICE — read before you touch the device
+    url: https://github.com/dkworld123/Sogou-E1-Open/blob/main/docs/NOTICE.md
+    about: Risks, disclaimers, recording-law compliance, privacy, forbidden operations
+  - name: FAQ
+    url: https://github.com/dkworld123/Sogou-E1-Open/blob/main/docs/FAQ.md
+    about: 19 answered questions (is it Armbian? why is fb0 empty? static linking errors…)
+  - name: Backlog
+    url: https://github.com/dkworld123/Sogou-E1-Open/blob/main/docs/BACKLOG.md
+    about: What is still unverified or unfinished — pick one and send a PR
+  - name: Upstream projects & licenses
+    url: https://github.com/dkworld123/Sogou-E1-Open/blob/main/THIRD_PARTY.md
+    about: Which upstream repos are used, and which ones declare no LICENSE

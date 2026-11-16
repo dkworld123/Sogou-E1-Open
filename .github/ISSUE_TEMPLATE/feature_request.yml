@@ -1,0 +1,57 @@
+name: 功能建议
+description: 提出新玩法、想合并的功能、文档改进
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    value: |
+      欢迎提议！如果你已经动手做过，请一并贴上**可复现的命令与输出**，
+      这样能省掉大量来回确认。
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: 想做什么
+      description: 一两句话说明目标
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 涉及范围
+      options:
+        - label: 只读 / 录音导出
+        - label: chroot Linux 与编译环境
+        - label: 录音 App / UI
+        - label: A/B 槽与系统改造
+        - label: 文档与翻译
+        - label: 其它
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: 你想到的思路
+      description: 涉及写分区的话，请**同时说明回滚路径**
+      render: shell
+      placeholder: |
+        1. ...
+        2. 回滚方式：...
+    validations:
+      required: false
+
+  - type: textarea
+    id: patch
+    attributes:
+      label: 是否已有代码 / 补丁
+      description: 可以贴 diff，或说明仓库与分支
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我确认不会在 Issue 中贴出设备序列号、WiFi 名称、密钥或录音内容
+          required: true

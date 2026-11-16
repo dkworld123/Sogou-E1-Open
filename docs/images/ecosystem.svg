@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="700" viewBox="0 0 980 700" font-family="Segoe UI, Microsoft YaHei, Helvetica, Arial, sans-serif">
+<rect width="980" height="700" fill="#ffffff"/>
+<rect x="0.5" y="0.5" width="979" height="699" rx="10" fill="none" stroke="#d0d7de"/>
+<text x="28" y="42" font-size="21" font-weight="700" fill="#1f2328">搜狗 AI 录音笔 E1 · 开源生态图</text>
+<text x="28" y="65" font-size="12" fill="#59636e">Sogou AI Recorder E1 — open-source ecosystem map　|　四条互不相同的路线，风险与收益差异很大</text>
+<rect x="20" y="86" width="6" height="194" rx="3" fill="#1f8833"/>
+<text x="38" y="107" font-size="14.5" font-weight="700" fill="#1f8833">路线 A · 替换原厂 App（零刷机）</text>
+<text x="38" y="125" font-size="11.5" fill="#59636e">只往 /userdata 写两个文件；删掉即回原厂，两个 App 互斥</text>
+<g>
+<rect x="38" y="138" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="138" width="4" height="60" rx="2" fill="#9a6700"/>
+<text x="52" y="160" font-size="12.5" font-weight="600" fill="#1f2328">rossihwang/freE1</text>
+<text x="52" y="177" font-size="11" fill="#59636e">LVGL 9.2.2 录音 App</text>
+<rect x="366.0" y="173" width="92.0" height="16" rx="8" fill="#fff8c5" stroke="#9a6700"/>
+<text x="412.0" y="185" font-size="9.5" fill="#633c01" text-anchor="middle">NO-LICENSE</text>
+</g>
+<g>
+<rect x="38" y="212" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="212" width="4" height="60" rx="2" fill="#9a6700"/>
+<text x="52" y="234" font-size="12.5" font-weight="600" fill="#1f2328">chopinshown/sogouE1</text>
+<text x="52" y="251" font-size="11" fill="#59636e">Qt Quick + 6 麦降噪</text>
+<rect x="366.0" y="247" width="92.0" height="16" rx="8" fill="#fff8c5" stroke="#9a6700"/>
+<text x="412.0" y="259" font-size="9.5" fill="#633c01" text-anchor="middle">NO-LICENSE</text>
+</g>
+<rect x="492" y="138" width="468" height="134" rx="8" fill="#ffffff" stroke="#1f8833" stroke-dasharray="4 3"/>
+<text x="504" y="158" font-size="11" fill="#1f8833">本项目采用：</text>
+<text x="504" y="175" font-size="11" fill="#1f8833">A 槽 = chopin（DRM/KMS 上屏）</text>
+<text x="504" y="192" font-size="11" fill="#1f8833">B 槽 = freE1（LVGL / fb0）</text>
+<text x="504" y="209" font-size="11" fill="#1f8833">按槽位分发，一个命令互换</text>
+<rect x="20" y="298" width="6" height="194" rx="3" fill="#0969da"/>
+<text x="38" y="319" font-size="14.5" font-weight="700" fill="#0969da">路线 B · 补回停服的云转写</text>
+<text x="38" y="337" font-size="11.5" fill="#59636e">不改固件，只写 /userdata；官方 2024-05-30 已停服</text>
+<g>
+<rect x="38" y="350" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="350" width="4" height="60" rx="2" fill="#1f8833"/>
+<text x="52" y="372" font-size="12.5" font-weight="600" fill="#1f2328">seabird000/E1Recorder</text>
+<text x="52" y="389" font-size="11" fill="#59636e">macOS 同步 + 自有云转写</text>
+<rect x="422.0" y="385" width="36.0" height="16" rx="8" fill="#dafbe1" stroke="#1f8833"/>
+<text x="440.0" y="397" font-size="9.5" fill="#116329" text-anchor="middle">MIT</text>
+</g>
+<g>
+<rect x="38" y="424" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="424" width="4" height="60" rx="2" fill="#9a6700"/>
+<text x="52" y="446" font-size="12.5" font-weight="600" fill="#1f2328">社区自建方案</text>
+<text x="52" y="463" font-size="11" fill="#59636e">接管 *.sogou.com 私有协议</text>
+<rect x="366.0" y="459" width="92.0" height="16" rx="8" fill="#fff8c5" stroke="#9a6700"/>
+<text x="412.0" y="471" font-size="9.5" fill="#633c01" text-anchor="middle">NO-LICENSE</text>
+</g>
+<rect x="492" y="350" width="468" height="134" rx="8" fill="#ffffff" stroke="#59636e" stroke-dasharray="4 3"/>
+<text x="504" y="370" font-size="11" fill="#59636e">本项目尚未集成</text>
+<text x="504" y="387" font-size="11" fill="#59636e">见 docs/BACKLOG.md</text>
+<rect x="20" y="510" width="6" height="268" rx="3" fill="#8250df"/>
+<text x="38" y="531" font-size="14.5" font-weight="700" fill="#8250df">路线 C · 研究资料（只读）</text>
+<text x="38" y="549" font-size="11.5" fill="#59636e">显示 / 音频 / 按键 / 设备树，逆向结论的主要来源</text>
+<g>
+<rect x="38" y="562" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="562" width="4" height="60" rx="2" fill="#9a6700"/>
+<text x="52" y="584" font-size="12.5" font-weight="600" fill="#1f2328">Hermes-Language/E1_Research</text>
+<text x="52" y="601" font-size="11" fill="#59636e">DRM·8麦·触摸·按键</text>
+<rect x="366.0" y="597" width="92.0" height="16" rx="8" fill="#fff8c5" stroke="#9a6700"/>
+<text x="412.0" y="609" font-size="9.5" fill="#633c01" text-anchor="middle">NO-LICENSE</text>
+</g>
+<g>
+<rect x="38" y="636" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="636" width="4" height="60" rx="2" fill="#9a6700"/>
+<text x="52" y="658" font-size="12.5" font-weight="600" fill="#1f2328">Hermes-Language/Armbian_E1</text>
+<text x="52" y="675" font-size="11" fill="#59636e">WIP：DTB + ALSA/UCM</text>
+<rect x="366.0" y="671" width="92.0" height="16" rx="8" fill="#fff8c5" stroke="#9a6700"/>
+<text x="412.0" y="683" font-size="9.5" fill="#633c01" text-anchor="middle">NO-LICENSE</text>
+</g>
+<g>
+<rect x="38" y="710" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="710" width="4" height="60" rx="2" fill="#0969da"/>
+<text x="52" y="732" font-size="12.5" font-weight="600" fill="#1f2328">Hermes-Language/build_e1</text>
+<text x="52" y="749" font-size="11" fill="#59636e">Armbian build framework</text>
+<rect x="390.0" y="745" width="68.0" height="16" rx="8" fill="#ddf4ff" stroke="#0969da"/>
+<text x="424.0" y="757" font-size="9.5" fill="#0a3069" text-anchor="middle">GPL-2.0</text>
+</g>
+<rect x="20" y="796" width="6" height="268" rx="3" fill="#bc4c00"/>
+<text x="38" y="817" font-size="14.5" font-weight="700" fill="#bc4c00">路线 D · 同 SoC 底层参考</text>
+<text x="38" y="835" font-size="11.5" fill="#59636e">换内核 / 换系统时才用；板级不同，只能当代码参考</text>
+<g>
+<rect x="38" y="848" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="848" width="4" height="60" rx="2" fill="#6e7781"/>
+<text x="52" y="870" font-size="12.5" font-weight="600" fill="#1f2328">jayanta525/rk3308-rock-pi-s</text>
+<text x="52" y="887" font-size="11" fill="#59636e">同 SoC 的 OpenWrt 参考</text>
+<rect x="358.0" y="883" width="100.0" height="16" rx="8" fill="#f6f8fa" stroke="#6e7781"/>
+<text x="408.0" y="895" font-size="9.5" fill="#59636e" text-anchor="middle">NOASSERTION</text>
+</g>
+<g>
+<rect x="38" y="922" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="922" width="4" height="60" rx="2" fill="#9a6700"/>
+<text x="52" y="944" font-size="12.5" font-weight="600" fill="#1f2328">MitchRatquest/rk3308_synth</text>
+<text x="52" y="961" font-size="11" fill="#59636e">modern buildroot patch</text>
+<rect x="366.0" y="957" width="92.0" height="16" rx="8" fill="#fff8c5" stroke="#9a6700"/>
+<text x="412.0" y="969" font-size="9.5" fill="#633c01" text-anchor="middle">NO-LICENSE</text>
+</g>
+<g>
+<rect x="38" y="996" width="430" height="60" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+<rect x="38" y="996" width="4" height="60" rx="2" fill="#6e7781"/>
+<text x="52" y="1018" font-size="12.5" font-weight="600" fill="#1f2328">JeffyCN/meta-rockchip</text>
+<text x="52" y="1035" font-size="11" fill="#59636e">Rockchip Yocto BSP</text>
+<rect x="422.0" y="1031" width="36.0" height="16" rx="8" fill="#f6f8fa" stroke="#6e7781"/>
+<text x="440.0" y="1043" font-size="9.5" fill="#59636e" text-anchor="middle">依仓库</text>
+</g>
+<text x="28" y="1098" font-size="12" font-weight="600" fill="#1f2328">许可证标记：</text>
+<rect x="118" y="1086" width="38.0" height="18" rx="9" fill="#dafbe1" stroke="#1f8833"/>
+<text x="137.0" y="1099" font-size="10" fill="#116329" text-anchor="middle">MIT</text>
+<rect x="166.0" y="1086" width="70.0" height="18" rx="9" fill="#ddf4ff" stroke="#0969da"/>
+<text x="201.0" y="1099" font-size="10" fill="#0a3069" text-anchor="middle">GPL-2.0</text>
+<rect x="246.0" y="1086" width="94.0" height="18" rx="9" fill="#fff8c5" stroke="#9a6700"/>
+<text x="293.0" y="1099" font-size="10" fill="#633c01" text-anchor="middle">NO-LICENSE</text>
+<rect x="350.0" y="1086" width="102.0" height="18" rx="9" fill="#f6f8fa" stroke="#6e7781"/>
+<text x="401.0" y="1099" font-size="10" fill="#59636e" text-anchor="middle">NOASSERTION</text>
+<text x="468.0" y="1099" font-size="11" fill="#59636e">NO-LICENSE = 上游未声明许可证（默认保留所有权利），本仓库只引用不打包</text>
+<text x="28" y="680" font-size="10.5" fill="#59636e">数据来源：docs/E1_GITHUB_PROJECTS.md（许可证状态查询于 2026-11-13）　·　生成脚本：tools/make_ecosystem.py</text>
+</svg>
