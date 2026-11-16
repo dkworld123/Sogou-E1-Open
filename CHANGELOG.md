@@ -5,6 +5,35 @@
 
 ---
 
+## v0.1.1 — 2026-11-16
+
+仓库工程化增强（不改任何设备侧逻辑）。
+
+**新增**
+
+- `.github/workflows/ci.yml`：push / PR 自动跑 CI——
+  `sh -n` 全量 shell 语法检查（含无扩展名的 `S98_e1linux`、`SogouE1.dispatch`）、
+  shellcheck（error 级）、`py_compile`、Markdown 相对链接断链检查、
+  敏感串扫描、设备端脚本 CRLF 检查。
+- `tools/check_links.py`：Markdown 相对链接检查，可本地复现 CI 结果。
+- `tools/check_secrets.py`：敏感信息扫描（本机绝对路径、token 前缀、私钥、
+  密钥赋值、内网 IP、IM 文件目录），脚本自身与 CI 配置自动排除。
+- `tools/make_ecosystem.py` + `docs/images/ecosystem.svg`：四条路线的开源生态图，
+  标注各上游项目的许可证状态；改数据后重跑脚本即可再生成。
+- `.github/ISSUE_TEMPLATE/`：Bug 报告表单（设备批次 / 固件 / 槽位 / 操作层级 /
+  复现步骤 / 日志）、功能建议表单、联系方式指引（指向 INSTALL / NOTICE / FAQ / BACKLOG）。
+- `README.en.md`：完整英文版，与中文版内容对齐。
+
+**变更**
+
+- `README.md`：顶部徽章行（CI / MIT / 平台 / 刷机风险 / 文档语言）、
+  中英文切换入口、新增「开源生态速览」章节、目录结构同步。
+- 文档编号顺延：原「11. 声明、许可证与致谢」改为「12.」。
+
+**验证**：CI 首次运行即通过（16 秒）；本地 103 条相对链接 0 断链、8 条敏感规则 0 命中。
+
+---
+
 ## v0.1.0 — 2026-11-16
 
 首次整理成可公开的开源仓库。
