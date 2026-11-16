@@ -1,0 +1,71 @@
+#!/bin/sh
+# ==========================================================
+# 搜狗 E1：按 A/B 槽位分发到不同录音 App
+#
+# 位置：/userdata/system/SogouE1（原厂 OTA 可写槽位，userdata 为 A/B 共享分区）
+# 调用：/etc/inittab  ::respawn:/usr/bin/SogouLunchProbe.sh
+#         -> /usr/bin/SogouLunch.sh
+#         -> [ -f /userdata/system/SogouE1 ] && exec /userdata/system/SogouE1
+#       A/B 两个 system squashfs 的这条启动链完全相同，
+#       所以本方案不需要改动、重刷任何分区。
+#
+# 配置：/userdata/system/e1_slot_apps.conf
+#         SLOT_A=chopin     A 槽：Qt Quick 版（DRM/KMS 上屏）
+#         SLOT_B=freE1      B 槽：LVGL 版（fb0 上屏）
+#       可选值：freE1 | chopin | factory（factory = 原厂 App）
+#
+# 兜底：认不出槽位、配置缺失、目标 launcher 不存在 -> 一律 exec 原厂 App。
+# ==========================================================
+CONF=/userdata/system/e1_slot_apps.conf
+LOG=/mnt/sdcard/e1_slot_dispatch.log
+
+CMD=$(cat /proc/cmdline 2>/dev/null)
+
+# 优先用 androidboot.slot_suffix；老固件没有该字段时退回 root PARTUUID 前缀
+#   A = 2f2f0000-0000-4b7b-8000-165000005d21
+#   B = a96b0000-0000-4122-8000-26000000272d
+case "$CMD" in
+    *androidboot.slot_suffix=_a*)  SLOT=A ;;
+    *androidboot.slot_suffix=_b*)  SLOT=B ;;
+    *root=PARTUUID=2f2f0000*)      SLOT=A ;;
+    *root=PARTUUID=a96b0000*)      SLOT=B ;;
+    *)                             SLOT=UNKNOWN ;;
+esac
+
+# 默认最保守：都不装第三方 App
+SLOT_A=factory
+SLOT_B=factory
+[ -r "$CONF" ] && . "$CONF"
+
+case "$SLOT" in
+    A) APP=$SLOT_A ;;
+    B) APP=$SLOT_B ;;
+    *) APP=factory ;;
+esac
+
+{
+    echo "=== slot=$SLOT app=$APP ==="
+    echo "cmdline: $CMD"
+} >> "$LOG" 2>/dev/null
+
+case "$APP" in
+    freE1)
+        # 清零连续崩溃计数，避免历史计数直接触发 freE1 的自动回退
+        echo 0 > /userdata/freE1/cnt 2>/dev/null || true
+        [ -x /userdata/system/SogouE1.freE1 ] || exec /usr/bin/SogouE1
+        exec /userdata/system/SogouE1.freE1
+        ;;
+    chopin)
+        # chopin launcher 在 App 正常退出后会写 disabled 并退回原厂，开机先清掉
+        rm -f /userdata/e1-recorder/disabled 2>/dev/null || true
+        [ -s /userdata/e1-recorder/current.version ] || \
+            echo 1.0.0 > /userdata/e1-recorder/current.version 2>/dev/null || true
+        # Qt DRM dumb buffer 需要连续内存，启动前回收页缓存
+        echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || true
+        [ -x /userdata/system/SogouE1.chopin ] || exec /usr/bin/SogouE1
+        exec /userdata/system/SogouE1.chopin
+        ;;
+    factory|*)
+        exec /usr/bin/SogouE1
+        ;;
+esac

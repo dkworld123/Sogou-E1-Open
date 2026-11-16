@@ -1,0 +1,30 @@
+#!/bin/sh
+# ==========================================================
+# 搜狗 E1 B 槽专属开机钩子（位于 system_b 的 squashfs 内）
+#
+# rcS 会以 "$0 start" 同步调用本脚本，所以必须立刻返回：
+# 真正逻辑放在 userdata 的 /mnt/sdcard/e1_boot_linux.sh，
+# 以后改逻辑不需要重刷 system_b 分区。
+#
+# A 槽没有这个文件，因此 A 槽行为与原厂完全一致。
+# ==========================================================
+HOOK=/mnt/sdcard/e1_boot_linux.sh
+LOG=/mnt/sdcard/e1_boot_linux.log
+
+case "$1" in
+  start)
+    if [ -f "$HOOK" ]; then
+      /bin/sh "$HOOK" >> "$LOG" 2>&1 &
+      echo "S98_e1linux: launched $HOOK" >> "$LOG"
+    else
+      echo "S98_e1linux: hook missing: $HOOK" >> "$LOG"
+    fi
+    ;;
+  stop)
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+exit 0

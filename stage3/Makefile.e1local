@@ -1,0 +1,34 @@
+# 本机改版：E1 的 Ubuntu 22.04 chroot 内用原生 aarch64 gcc 编译「全静态」freE1
+# 全静态把 glibc 一起打进二进制，绕过原厂 Buildroot glibc 2.26 的版本限制。
+# ALSA 静态库由 build_static.sh 从 alsa-lib 1.1.9 现场编译到 /e1_freE1/alsa-out。
+CC      ?= gcc
+LVGL    := hwtest/third_party/lvgl
+ALSA    := /e1_freE1/alsa-out
+SRC     := src/util.c src/wav.c src/session.c src/audio_dev.c src/audio_sim.c \
+           src/rec.c src/engine.c src/http.c src/wifi.c src/wifi_ui.c src/hal_disp_fb.c src/hal_input.c \
+           src/ui.c src/main.c src/audio_play.c src/monitor.c src/marks.c common/hal_sysfs.c
+LVSRC   := $(shell find $(LVGL)/src -name '*.c')
+OBJ     := $(patsubst %.c,build_e1ui/obj/%.o,$(SRC))
+LVOBJ   := $(patsubst $(LVGL)/src/%.c,build_e1ui/lvgl/%.o,$(LVSRC))
+CFLAGS  := -O2 -g -std=gnu11 -march=armv8-a -Isrc -Icommon -Ihwtest -I$(ALSA)/include -I$(LVGL) \
+           -DLV_CONF_INCLUDE_SIMPLE -DFREEL1_NO_PNG -DFREEL1_NO_X11 \
+           -Wall -Wno-unused-parameter -Wno-sign-compare -MMD -MP
+LDFLAGS := -static -L$(ALSA)/lib
+# 静态链接顺序敏感：-lm 必须排在 -lasound 之后，否则 libasound.a(pcm_ladspa/pcm_softvol)
+# 里的 exp / pow / sqrtf 无法解析（首次编译就栽在这里）。
+LDLIBS  := -lpthread -lasound -ldl -lm
+TARGET  := build_e1ui/freE1
+
+all: $(TARGET)
+$(TARGET): $(OBJ) $(LVOBJ)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+build_e1ui/obj/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+build_e1ui/lvgl/%.o: $(LVGL)/src/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+clean:
+	rm -rf build_e1ui
+.PHONY: all clean
+-include $(OBJ:.o=.d) $(LVOBJ:.o=.d)

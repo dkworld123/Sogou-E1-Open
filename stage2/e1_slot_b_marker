@@ -1,0 +1,6 @@
+E1 SLOT B / LINUX EDITION
+built 2026-11-13
+base: stock system_a squashfs (gzip, 128KB blocks)
+added: /etc/init.d/S98_e1linux  ->  /mnt/sdcard/e1_boot_linux.sh
+slot A is untouched stock firmware; switch back with:
+  /usr/bin/updateEngine --misc=other --reboot

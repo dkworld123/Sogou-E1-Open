@@ -1,0 +1,57 @@
+# ── 原厂固件与分区备份：有版权风险且单文件常超 GitHub 100 MB 上限 ──
+*.img
+*.kernel
+*.ramdisk
+firmware/
+backups/
+e1_stock_backup/
+
+# ── 个人数据：录音、数据库、导出物 ──
+*.wav
+*.mp3
+*.m4a
+*.db
+*.sqlite
+e1_exports/
+my_recordings/
+.e1_exported.json
+
+# ── 第三方源码 / 工具链 / rootfs：用 tools/fetch_*.sh 获取，不入库 ──
+deps/
+vendor/
+third_party/
+rootfs/
+qt_src/
+toolchain/
+alsa_src/
+lvgl_src/
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tgz
+*.zip
+*.pack
+
+# ── 编译产物与二进制 ──
+build/
+build_*/
+*.o
+*.a
+*.so
+*.so.*
+*.pyc
+__pycache__/
+*.log
+
+# ── 本机 / 编辑器 / 临时 ──
+.probe/
+.workbuddy/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+usb2.txt
+
+# ── 例外：文档截图需要保留 ──
+!docs/images/*.png
